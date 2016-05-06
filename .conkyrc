@@ -1,0 +1,123 @@
+background yes
+
+#prawy dolny rog
+gap_x 270
+gap_y 15
+
+maximum_width 200
+
+# X font when Xft is disabled, you can pick one with program xfontsel
+#font -*-*-*-r-normal--14-*-*-*-c-*-iso8859-2
+font -xos4-terminus-*-r-normal-*-12-100-*-*-c-*-iso10646-1
+
+# Use Xft?
+use_xft yes
+
+#xftfont Bitstream Vera Sans Mono:size=8
+xftfont Terminus:encoding=utf-8:size=9
+xftalpha 0.9
+
+update_interval 1.0
+
+total_run_times 0
+
+own_window yes
+
+own_window_type override
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+own_window_transparent yes
+
+# If own_window_transparent is set to no, you can set the background colour here
+own_window_colour hotpink
+
+# Use double buffering (reduces flicker, may not work for everyone)
+double_buffer yes
+draw_shades yes
+draw_outline no
+draw_borders no
+stippled_borders 8
+#border_margin 4
+border_width 1
+
+default_color white
+default_shade_color black
+default_outline_color white
+
+alignment top_right
+no_buffers yes
+uppercase no
+use_spacer right
+
+TEXT
+${color slate grey}${color #ddaa00}${font Terminus:encoding=iso8859-2:size=15}${time %A}${color}
+${font :encoding=iso8859-2:size=10}$alignc${color #ddaa00}${time %e %B %G}
+${color slate grey}Kernel:
+$alignc${color }$kernel
+${color slate grey}UpTime:
+$alignc${color }$uptime
+#${color slate grey}Load:
+#$alignc${color }$loadavg
+
+${color slate grey}${font :size=8}CPU1:               ${color white}${cpu cpu0}% ${alignr}${cpubar cpu0 7,75}
+${color slate grey}CPU2:               ${color white}${cpu cpu1}% ${alignr}${cpubar cpu1 7,75}
+${color slate grey}CPU3:               ${color white}${cpu cpu2}% ${alignr}${cpubar cpu2 7,75}
+${color slate grey}CPU4:               ${color white}${cpu cpu3}% ${alignr}${cpubar cpu3 7,75}
+
+${color slate grey}CPU:                       ${color light blue}     ${freq} MHz 
+${color slate grey}CPUTemp: ${color sky blue}${alignr}${exec sensors | grep 'SYS Temp\|Physical id 0: \|SBr Temp' | cut -c 17-25}
+
+${color slate grey}${font :size=8}${voffset -4}CPU: ${color white}$alignr${exec sensors | grep 'SYS Temp\|fan1\|SBr Temp' | cut -c 14-28}
+${color slate grey}FAN1: ${color white}$alignr${exec sensors | grep 'SYS Temp\|fan2\|SBr Temp' | cut -c 14-28}
+${color slate grey}FAN2: ${color white}$alignr${exec sensors | grep 'SYS Temp\|fan3\|SBr Temp' | cut -c 14-28}
+${color slate grey}FAN3: ${color white}$alignr${exec sensors | grep 'SYS Temp\|fan4\|SBr Temp' | cut -c 14-28}
+
+${font :size=8}${color #ddaa00}${top name 1}$alignr${top cpu 1}
+${color lightgrey}${top name 2}$alignr${top cpu 2}
+${color lightgrey}${top name 3}$alignr${top cpu 3}
+${color lightgrey}${top name 4}$alignr${top cpu 4}
+${font :size=9}
+${color slate grey}RAM:   $color%$memperc ${alignr}$mem
+${membar 5,200}
+${color slate grey}SWAP: $color%$swapperc ${alignr}$swap
+${swapbar 5,200}
+${font :size=8}${color #ddaa00}${top_mem name 1}$alignr${top_mem mem 1}
+${color lightgrey}${top_mem name 2}$alignr${top_mem mem 2}
+${color lightgrey}${top_mem name 3}$alignr${top_mem mem 3}
+${color lightgrey}${top_mem name 4}$alignr${top_mem mem 4}
+${font :size=9}
+${color slate grey}TWARDZIEL: $color$alignr$diskio
+${color slate grey}${diskiograph 25,200 000000 ff0000}
+${color slate grey} /:${alignr}${color }${fs_free /}
+${fs_bar 5,200 /}
+${color slate grey} /:home${alignr}${color }${fs_free /home}
+${fs_bar 5,200 /home}
+${color slate grey} /:dane${alignr}${color }${fs_free /home/pawlik/dane}
+${fs_bar 5,200 /home/pawlik/dane}
+
+${color slate grey}INTERNET:
+${color}DL:${color #ddaa00}${downspeed eth0}${color}UP:${color #ddaa00}${upspeed eth0}${color}${alignr}KiB/s
+${offset 10}${color}Total: ${color white}${totaldown eth0}
+${offset 10}${color}Total: ${color white}${totalup eth0}
+${color slate grey}${downspeedgraph eth0 25,200 000000 00ff00}
+${color slate grey}${upspeedgraph eth0 25,200 000000 0000ff}
+
+${color #0077ff}@Connections@
+$color Outbound: ${tcp_portmon 32768 61000 count}
+$color Inbound: ${tcp_portmon 1 32767 count}
+${color #0077ff}Outbound Connection ${alignr} Port$color
+ ${tcp_portmon 32768 61000 rip 0} ${alignr} ${tcp_portmon 32768 61000 rservice 0}
+  ${tcp_portmon 32768 61000 rip 1} ${alignr} ${tcp_portmon 32768 61000 rservice 1}
+   ${tcp_portmon 32768 61000 rip 2} ${alignr} ${tcp_portmon 32768 61000 rservice 2}
+    ${tcp_portmon 32768 61000 rip 3} ${alignr} ${tcp_portmon 32768 61000 rservice 3}
+     ${tcp_portmon 32768 61000 rip 4} ${alignr} ${tcp_portmon 32768 61000 rservice 4}
+      ${tcp_portmon 32768 61000 rip 5} ${alignr} ${tcp_portmon 32768 61000 rservice 5}
+       ${tcp_portmon 32768 61000 rip 6} ${alignr} ${tcp_portmon 32768 61000 rservice 6}
+        ${tcp_portmon 32768 61000 rip 7} ${alignr} ${tcp_portmon 32768 61000 rservice 7}
+	 ${tcp_portmon 32768 61000 rip 8} ${alignr} ${tcp_portmon 32768 61000 rservice 8}
+	  ${tcp_portmon 32768 61000 rip 9} ${alignr} ${tcp_portmon 32768 61000 rservice 9}
+	   ${tcp_portmon 32768 61000 rip 10} ${alignr} ${tcp_portmon 32768 61000 rservice 10}
+
+	   ${color light green}NVIDIA:${color sky blue}                             ${execi 30 nvidia-settings -query GPUCoreTemp | perl -ne 'print $1 if /GPUCoreTemp.*?: (\d+)./;'}°C
+	   #NVIDIA  
+
+
